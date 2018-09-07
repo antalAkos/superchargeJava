@@ -29,10 +29,16 @@ public class User {
     }
 
     public void deposit(BigDecimal sum) {
-        this.account.setBalance(this.account.getBalance().add(sum));
+        this.account.addMoney(sum);
     }
 
     public void withDraw(BigDecimal sum) {
-        this.account.setBalance(this.account.getBalance().subtract(sum));
+        this.account.subtractMoney(sum);
     }
+
+    public void transfer(User toUser, BigDecimal sum) {
+        this.account.subtractMoney(sum);
+        toUser.getAccount().addMoney(sum);
+    }
+
 }
