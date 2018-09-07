@@ -5,11 +5,11 @@ import java.math.BigDecimal;
 public class User {
 
     private String name;
-    private static Account account;
+    private Account account;
 
     public User(String name, Account account) {
         this.name = name;
-        account = account;
+        this.account = account;
     }
 
     public String getName() {
@@ -29,10 +29,10 @@ public class User {
     }
 
     public void deposit(BigDecimal sum) {
-
+        this.account.setBalance(this.account.getBalance().add(sum));
     }
 
     public void withDraw(BigDecimal sum) {
-
+        this.account.setBalance(this.account.getBalance().subtract(sum));
     }
 }
