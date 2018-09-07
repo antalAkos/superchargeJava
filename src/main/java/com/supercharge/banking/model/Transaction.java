@@ -1,6 +1,7 @@
 package com.supercharge.banking.model;
 
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class Transaction {
@@ -29,6 +30,9 @@ public class Transaction {
 
     @Override
     public String toString() {
-        return this.type + "|" + this.amount.toString() + "|" + this.transactionTime.toString() + "|" + this.balance.toString();
+        return  "| Type: " + this.type +
+                "| Amount: " + this.amount.toString() +
+                "| Date: " + new SimpleDateFormat("yyyy-MM-dd").format(this.transactionTime.getTime()) +
+                "| Balance: " + this.balance.toString();
     }
 }

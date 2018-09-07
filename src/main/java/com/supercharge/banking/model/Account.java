@@ -9,7 +9,7 @@ import java.util.List;
 public class Account {
 
     private final User user;
-    private BigDecimal balance;
+    private BigDecimal balance = new BigDecimal(0);
     private TransactionRepo transactionRepo;
 
     public Account(User user) {
@@ -26,12 +26,12 @@ public class Account {
     }
 
     public void addMoney(BigDecimal sum) {
-        this.balance.add(sum);
+        this.balance = this.balance.add(sum);
         transactionRepo.addTransaction(new Transaction(this.user, Calendar.getInstance(), sum, this.balance, "deposit"));
     }
 
     public void subtractMoney(BigDecimal sum) {
-        this.balance.subtract(sum);
+        this.balance = this.balance.subtract(sum);
         transactionRepo.addTransaction(new Transaction(this.user, Calendar.getInstance(), sum, this.balance, "withdrawal"));
     }
 

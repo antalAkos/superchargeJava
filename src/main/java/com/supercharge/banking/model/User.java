@@ -11,9 +11,8 @@ public class User {
     private String name;
     private Account account;
 
-    public User(String name, Account account) {
+    public User(String name) {
         this.name = name;
-        this.account = account;
     }
 
     public String getName() {
@@ -46,22 +45,22 @@ public class User {
     }
 
     public void printTransactionHistory() {
-        System.out.println("Transaction by: " + this.name);
+        System.out.println("Transactions by: " + this.name);
         this.account.getTransactionHistory().forEach(s -> System.out.println(s.toString()));
     }
 
     public List<Transaction> getTransactionByDirection(String type) {
-        List transactions = this.account.getTransactionHistory()
+        List<Transaction> transactions = this.account.getTransactionHistory()
                 .stream()
                 .filter(s -> s.getType().equals(type)).collect(Collectors.toList());
         return transactions;
     }
 
     public List<Transaction> getTransactionsByDate(Calendar date) {
-        String dateToFind =  new SimpleDateFormat("yyyy-MM-dd").format(date);
+        String dateToFind =  new SimpleDateFormat("yyyy-MM-dd").format(date.getTime());
         List <Transaction> transactions = this.account.getTransactionHistory()
                 .stream()
-                .filter(s ->  new SimpleDateFormat("yyyy-MM-dd").format(s.getTransactionTime()).equals(dateToFind)).collect(Collectors.toList());
+                .filter(s ->  new SimpleDateFormat("yyyy-MM-dd").format(s.getTransactionTime().getTime()).equals(dateToFind)).collect(Collectors.toList());
         return transactions;
     }
 
