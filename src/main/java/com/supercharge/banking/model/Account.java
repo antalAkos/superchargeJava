@@ -9,7 +9,7 @@ public class Account {
 
     private final User user;
     private BigDecimal balance;
-    private List<TransactionHistory> transactionHistories = new LinkedList<TransactionHistory>();
+    private List<Transaction> transactionHistory = new LinkedList<Transaction>();
 
     public Account(User user) {
         this.user = user;
@@ -25,12 +25,16 @@ public class Account {
 
     public void addMoney(BigDecimal sum) {
         this.balance.add(sum);
-        transactionHistories.add(new TransactionHistory(this.user, Calendar.getInstance(), sum, this.balance));
+        transactionHistory.add(new Transaction(this.user, Calendar.getInstance(), sum, this.balance, "deposit"));
     }
 
     public void subtractMoney(BigDecimal sum) {
         this.balance.subtract(sum);
-        transactionHistories.add(new TransactionHistory(this.user, Calendar.getInstance(), sum, this.balance));
+        transactionHistory.add(new Transaction(this.user, Calendar.getInstance(), sum, this.balance, "withdrawal"));
     }
 
+
+    public List<Transaction> getTransactionHistory() {
+        return transactionHistory;
+    }
 }
